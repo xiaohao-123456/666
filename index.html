@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奖状展示</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #content {
+            display: none;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 24px;
+            color: #333;
+        }
+        #certificate {
+            max-width: 90%;
+            height: auto;
+            border: 5px solid #ffcc00;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>奖状展示</h1>
+        <img id="certificate" src="result.jpeg" alt="奖状">
+    </div>
+    <div id="countdown"></div>
+
+    <script>
+        function countdown() {
+            const releaseDate = new Date("2024-07-27T00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = releaseDate - now;
+
+            if (distance <= 0) {
+                document.getElementById("content").style.display = "block";
+                document.getElementById("countdown").style.display = "none";
+            } else {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML =
+                    "距离奖状展示还有 " + days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
+
+                setTimeout(countdown, 1000);
+            }
+        }
+
+        countdown();
+    </script>
+</body>
+</html>
